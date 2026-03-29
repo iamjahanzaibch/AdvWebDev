@@ -5,11 +5,43 @@ import reservationsRouter from "./routes/reservations.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import jwt from "jsonwebtoken";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+function getTokenFromCookie(cookieHeader) {
+  if (!cookieHeader) return null;
+
+  const entries = cookieHeader.split(";").map((part) => part.trim());
+  const tokenEntry = entries.find((entry) => entry.startsWith("auth_token="));
+  if (!tokenEntry) return null;
+
+  const value = tokenEntry.slice("auth_token=".length);
+  return decodeURIComponent(value);
+}
+
+function requirePageAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+  const headerToken = authHeader?.startsWith("Bearer ")
+    ? authHeader.substring(7)
+    : null;
+  const cookieToken = getTokenFromCookie(req.headers.cookie);
+  const token = headerToken || cookieToken;
+
+  if (!token) {
+    return res.redirect("/login");
+  }
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
+    return next();
+  } catch {
+    return res.redirect("/login");
+  }
+}
 
 // --- Middleware ---
 app.use(express.json()); // Parse application/json
@@ -37,7 +69,7 @@ app.get("/resources", (req, res) => {
   res.sendFile(path.join(__dirname, 'views/resources.html'));
 });
 
-app.get("/reservations", (req, res) => {
+app.get("/reservations", requirePageAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'views/reservations.html'));
 });
 

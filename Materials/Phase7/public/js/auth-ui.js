@@ -100,6 +100,7 @@ export function initAuthUI() {
 
 export function logout() {
   localStorage.removeItem("token");
+  document.cookie = "auth_token=; Path=/; Max-Age=0; SameSite=Lax";
   window.location.reload();
 }
 

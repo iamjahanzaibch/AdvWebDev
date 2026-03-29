@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       showMessage("success", successMessage);
       localStorage.setItem("token", body.token);
+      document.cookie = `auth_token=${encodeURIComponent(body.token)}; Path=/; SameSite=Lax`;
 
       const redirectTo =
         body?.redirectTo ||
