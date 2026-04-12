@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function StatusCard({ status }) {
   return (
     <aside className="status-card">
@@ -13,12 +15,12 @@ export default function StatusCard({ status }) {
       </p>
 
       <div className="status-card__actions">
-        <a href={status.primaryAction.href} className="status-card__action status-card__action--ghost">
+        <Link to={status.primaryAction.href} className="status-card__action status-card__action--ghost">
           {status.primaryAction.label}
-        </a>
-        <a href={status.secondaryAction.href} className="status-card__action status-card__action--solid">
+        </Link>
+        <Link to={status.secondaryAction.href} className="status-card__action status-card__action--solid">
           {status.secondaryAction.label}
-        </a>
+        </Link>
       </div>
     </aside>
   );

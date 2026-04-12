@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import StatusCard from "./StatusCard";
 
 export default function Hero({ content, status }) {
@@ -9,12 +10,12 @@ export default function Hero({ content, status }) {
         <p className="hero__description">{content.description}</p>
 
         <div className="hero__actions">
-          <a href={content.primaryAction.href} className="button button--primary">
+          <Link to={content.primaryAction.href} className="button button--primary">
             {content.primaryAction.label}
-          </a>
-          <a href={content.secondaryAction.href} className="button button--secondary">
+          </Link>
+          <Link to={content.secondaryAction.href} className="button button--secondary">
             {content.secondaryAction.label}
-          </a>
+          </Link>
         </div>
       </div>
 

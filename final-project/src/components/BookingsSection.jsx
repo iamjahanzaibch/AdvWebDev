@@ -1,6 +1,6 @@
-export default function BookingsSection({ bookings }) {
+export default function BookingsSection({ bookings, id = "bookings" }) {
   return (
-    <section className="bookings" aria-labelledby="bookings-title">
+    <section className="bookings" id={id} aria-labelledby="bookings-title">
       <div className="bookings__panel">
         <h2 id="bookings-title" className="bookings__title">
           Current bookings

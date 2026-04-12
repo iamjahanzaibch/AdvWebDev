@@ -356,6 +356,231 @@ a {
   padding: 0 0 3rem;
 }
 
+.form-page {
+  padding: 4.1rem 0 3rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-page__hero {
+  display: grid;
+  gap: 1rem;
+  max-width: 44rem;
+}
+
+.form-page__title {
+  margin: 0;
+  font-size: clamp(2.15rem, 4vw, 3.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  max-width: 12ch;
+}
+
+.form-page__description {
+  margin: 0;
+  max-width: 42rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.form-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form-page__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.form-panel,
+.response-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 1.65rem;
+}
+
+.form-panel__title,
+.response-panel__title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.form-panel__lead,
+.response-panel__lead {
+  margin: 0.35rem 0 0;
+  color: rgba(30, 30, 30, 0.58);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.booking-form {
+  margin-top: 1.4rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.form-field__label {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.form-field__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(30, 30, 30, 0.12);
+  background: rgba(247, 242, 236, 0.55);
+  color: var(--ink);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.form-field__input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(225, 14, 73, 0.12);
+}
+
+.form-field__input--invalid {
+  border-color: rgba(225, 14, 73, 0.7);
+  background: rgba(225, 14, 73, 0.05);
+}
+
+.form-field__hint {
+  margin: 0;
+  color: rgba(30, 30, 30, 0.56);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.form-field__error {
+  margin: 0;
+  color: var(--rose);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.form-panel__status {
+  min-height: 1.25rem;
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.form-panel__status--success {
+  color: var(--green);
+}
+
+.form-panel__status--error {
+  color: var(--rose);
+}
+
+.form-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.form-panel__actions .button:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.response-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.response-panel--empty {
+  align-content: start;
+}
+
+.response-panel__message {
+  padding: 1rem 1.05rem;
+  border-radius: 1rem;
+  background: rgba(40, 78, 54, 0.1);
+  color: var(--green);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.response-panel__message--error {
+  background: rgba(194, 77, 82, 0.1);
+  color: var(--rose);
+}
+
+.response-panel__summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.response-metric {
+  background: rgba(30, 30, 30, 0.04);
+  border-radius: 1rem;
+  padding: 0.85rem 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.response-metric__label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.response-metric__value {
+  display: block;
+  margin-top: 0.35rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.response-panel__section {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.response-panel__section-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.response-panel__pre {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #101317;
+  color: #e9eef5;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  overflow: auto;
+}
+
+.response-panel__empty-state {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .bookings__panel {
   background: rgba(255, 255, 255, 0.92);
   border-radius: var(--radius-xl);
@@ -509,6 +734,10 @@ a {
   .hero__title {
     max-width: 14ch;
   }
+
+  .form-page__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 840px) {
@@ -547,6 +776,10 @@ a {
 
   .hero__actions,
   .status-card__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .response-panel__summary {
     grid-template-columns: 1fr;
   }
 
