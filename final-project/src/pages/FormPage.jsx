@@ -129,23 +129,23 @@ export default function FormPage() {
 
   return (
     <section className="form-page" aria-labelledby="form-page-title">
-      <div className="form-page__hero">
-        <span className="hero__eyebrow">Routed booking form</span>
-        <h1 id="form-page-title" className="form-page__title">
-          Send a booking request to httpbin
-        </h1>
-        <p className="form-page__description">
-          This page uses the same booking-system theme as the home page, but it demonstrates routing, input
-          validation, and a visible server response after submission.
-        </p>
-        <div className="form-page__actions">
-          <Link to="/" className="button button--secondary">
-            Back to home
-          </Link>
+      <div className="form-page__top">
+        <div className="form-page__hero">
+          <span className="hero__eyebrow">Routed booking form</span>
+          <h1 id="form-page-title" className="form-page__title">
+            Send a booking request to httpbin
+          </h1>
+          <p className="form-page__description">
+            This page uses the same booking-system theme as the home page, but it demonstrates routing, input
+            validation, and a visible server response after submission.
+          </p>
+          <div className="form-page__actions">
+            <Link to="/" className="button button--secondary">
+              Back to home
+            </Link>
+          </div>
         </div>
-      </div>
 
-      <div className="form-page__grid">
         <form className="form-panel" onSubmit={handleSubmit} noValidate>
           <h2 className="form-panel__title">Booking details</h2>
           <p className="form-panel__lead">Fill in three different input types. Invalid data is blocked before submission.</p>
@@ -298,7 +298,9 @@ export default function FormPage() {
             </div>
           </div>
         </form>
+      </div>
 
+      <div className="form-page__response">
         <FormResponse
           status={status}
           submittedData={submittedData}
