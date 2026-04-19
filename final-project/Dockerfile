@@ -7,5 +7,8 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5173
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+# Expose both frontend (5173) and backend (5000) ports
+EXPOSE 5173 5000
+
+# Default to frontend dev server; override with docker-compose command
+CMD ["npm", "run", "dev:frontend", "--", "--host", "0.0.0.0", "--port", "5173"]

@@ -94,7 +94,8 @@ export default function FormPage() {
     setSubmittedData(payload);
 
     try {
-      const response = await fetch("https://httpbin.org/post", {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+      const response = await fetch(`${apiBaseUrl}/api/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,21 +104,18 @@ export default function FormPage() {
       });
 
       if (!response.ok) {
-        throw new Error(`httpbin responded with status ${response.status}.`);
+        throw new Error(`Server responded with status ${response.status}.`);
       }
 
       const data = await response.json();
       setResponseData({
-        url: data.url,
-        origin: data.origin,
         statusCode: response.status,
-        json: data.json,
-        headers: data.headers,
-        data,
+        message: data.message || "Booking saved successfully",
+        booking: data.data,
       });
       setStatus("success");
     } catch (error) {
-      setSubmissionError(error instanceof Error ? error.message : "Something went wrong while sending the form.");
+      setSubmissionError(error instanceof Error ? error.message : "Something went wrong while submitting the booking.");
       setStatus("error");
     }
   };
@@ -133,11 +131,11 @@ export default function FormPage() {
         <div className="form-page__hero">
           <span className="hero__eyebrow">Routed booking form</span>
           <h1 id="form-page-title" className="form-page__title">
-            Send a booking request to httpbin
+            Submit a booking request
           </h1>
           <p className="form-page__description">
             This page uses the same booking-system theme as the home page, but it demonstrates routing, input
-            validation, and a visible server response after submission.
+            validation, and integration with the backend API to save bookings to the database.
           </p>
           <div className="form-page__actions">
             <Link to="/" className="button button--secondary">
@@ -196,7 +194,7 @@ export default function FormPage() {
                 aria-describedby={emailError ? "emailAddress-error" : "emailAddress-hint"}
               />
               <p className="form-field__hint" id="emailAddress-hint">
-                We will use this address to echo the submission back from httpbin.
+                We will use this address to contact you about your booking.
               </p>
               {emailError ? (
                 <p className="form-field__error" id="emailAddress-error">
@@ -261,13 +259,13 @@ export default function FormPage() {
 
             {status === "submitting" ? (
               <p className="form-panel__status" aria-live="polite">
-                Sending booking request to httpbin...
+                Sending booking request to the server...
               </p>
             ) : null}
 
             {status === "success" ? (
               <p className="form-panel__status form-panel__status--success" aria-live="polite">
-                Submission completed successfully.
+                Booking submitted successfully and saved to the database!
               </p>
             ) : null}
 
@@ -279,7 +277,7 @@ export default function FormPage() {
 
             <div className="form-panel__actions">
               <button className="button button--primary" type="submit" disabled={status === "submitting"}>
-                {status === "submitting" ? "Submitting..." : "Send to httpbin"}
+                {status === "submitting" ? "Submitting..." : "Submit booking request"}
               </button>
               <button
                 className="button button--secondary"

@@ -1,9 +1,52 @@
+name: final-project
 services:
-  app:
+  database:
+    image: postgres:latest
+    container_name: final-project-db
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
+    ports:
+      - "${EPGPORT}:${PGPORT}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+
+  backend:
     build: .
+    image: final-project-backend
+    container_name: final-project-backend
+    depends_on:
+      - database
+    environment:
+      PGHOST: database
+      PGPORT: ${PGPORT}
+      PGDATABASE: ${PGDATABASE}
+      PGUSER: ${PGUSER}
+      PGPASSWORD: ${PGPASSWORD}
+      IPORT: ${IPORT}
+    ports:
+      - "${EPORT}:${IPORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: node --watch server.js
+
+  frontend:
+    build: .
+    image: final-project-frontend
+    container_name: final-project-frontend
+    depends_on:
+      - backend
     ports:
       - "5173:5173"
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run dev -- --host 0.0.0.0 --port 5173
+    command: npm run dev:frontend -- --host 0.0.0.0 --port 5173
+    environment:
+      VITE_API_BASE_URL: http://backend:${IPORT}
+
+volumes:
+  pgdata: {}
