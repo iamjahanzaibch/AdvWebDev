@@ -9,11 +9,20 @@ This is a complete full-stack application combining:
 
 ```
 final-project/
-├── frontend files (src/, package.json, vite.config.js)
-├── backend files (server.js, src/app.js, src/routes/, src/services/)
+├── frontend/
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── originalPage/
+│   └── src/
+├── backend/
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── server.js
+│   └── src/
 ├── database files (db/init/ with SQL scripts)
 ├── docker-compose.yml (orchestrates all services)
-├── Dockerfile (builds the Node.js environment)
 └── .env (environment configuration)
 ```
 
@@ -49,6 +58,10 @@ docker compose up -d --build
 ```bash
 # Install dependencies
 npm install
+
+# Or install by area if you want to work directly in each subproject
+# cd frontend && npm install
+# cd ../backend && npm install
 
 # Create .env file with database credentials
 PGHOST=localhost
